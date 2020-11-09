@@ -27,18 +27,18 @@ class Component:
         :return: This components ABCD matrix, based on its connection type
         """
         if self._connection_type == self.SERIES:
-            return Component.get_series_ABCD(self.impedance)
+            return Component._get_series_ABCD(self.impedance)
         else:
-            return Component.get_shunt_ABCD(self.impedance)
+            return Component._get_shunt_ABCD(self.impedance)
 
     @input_freq.setter
     def input_freq(self, omega):
         self._input_freq = omega
 
     @staticmethod
-    def get_series_ABCD(impedance):
-        return np.array([1, impedance], [0, 1])
+    def _get_series_ABCD(impedance):
+        return np.array([[1, impedance], [0, 1]])
 
     @staticmethod
-    def get_shunt_ABCD(impedance):
-        return Component.get_series_ABCD(impedance).T
+    def _get_shunt_ABCD(impedance):
+        return Component._get_series_ABCD(impedance).T

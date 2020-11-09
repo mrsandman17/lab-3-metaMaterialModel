@@ -6,5 +6,6 @@ class Inductor(Component):
         super().__init__(connection_type)
         self._inductance = inductance
 
+    @property
     def impedance(self):
         return np.complex(1j * self.input_freq * self._inductance)

@@ -5,5 +5,6 @@ class Resistor(Component):
         super().__init__(connection_type)
         self._resistance = resistance
 
+    @property
     def impedance(self):
         return self._resistance

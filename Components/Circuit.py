@@ -18,9 +18,10 @@ class Circuit(Component):
         :return: The ABCD matrix of the circuit,
         it is the product of all the ABCD matrices of the components
         """
-        abcd = np.array([1, 0], [0, 1])
-        for component, connection_type in reversed(self._components):
-            abcd = abcd.dot(component.ABCD)
+        abcd = np.array([[1, 0], [0, 1]])
+        for component in reversed(self._components):
+            temp = component.ABCD
+            abcd = abcd.dot(temp)
         return abcd
 
     @Component.input_freq.setter

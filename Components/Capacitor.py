@@ -6,5 +6,6 @@ class Capacitor(Component):
         super().__init__(connection_type)
         self._capacitance = capacitance
 
+    @property
     def impedance(self):
         return np.complex(1 / (1j * self.input_freq * self._capacitance))
