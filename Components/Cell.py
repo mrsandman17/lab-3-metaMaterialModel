@@ -5,6 +5,9 @@ from Components.Capacitor import Capacitor
 from Components.TransmissionLine import TransmissionLine
 
 class Cell(Circuit):
+    """
+    Represents a single cell of a metaMaterial
+    """
 
     def __init__(self, R, L0, G, C0, L, C, length, connection_type):
         super().__init__(connection_type)

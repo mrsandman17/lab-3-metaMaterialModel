@@ -6,6 +6,9 @@ from Components.Component import Component
 import numpy as np
 
 class TransmissionLine(Circuit):
+    """
+    A transmission line, This circuit has a unique ABCD matrix
+    """
 
     def __init__(self, R, L0, G, C0, length, connection_type):
         super().__init__(connection_type)
