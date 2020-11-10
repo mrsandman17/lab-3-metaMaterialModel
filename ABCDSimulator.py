@@ -33,6 +33,8 @@ class ABCDSimulator:
             reflection_coefficients[i] = self.get_reflection_coefficient(start_vector)
             i = i + 1
         plt.plot(frequency_range, transmission_coefficients)
+        plt.ylabel('S11')
+        plt.xlabel('Frequency')
         plt.plot(frequency_range, reflection_coefficients)
         plt.show()
 
