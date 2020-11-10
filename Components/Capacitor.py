@@ -8,4 +8,4 @@ class Capacitor(Component):
 
     @property
     def impedance(self):
-        return np.complex(1 / (1j * self.input_freq * self._capacitance))
+        return np.complex(1 / (1j * 2 * np.pi * self.input_freq * self._capacitance))

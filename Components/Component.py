@@ -41,4 +41,4 @@ class Component:
 
     @staticmethod
     def _get_shunt_ABCD(impedance):
-        return Component._get_series_ABCD(impedance).T
+        return np.array([[1, 0], [1 / impedance, 1]])

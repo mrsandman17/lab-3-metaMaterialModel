@@ -30,7 +30,7 @@ class ABCDSimulator:
             self._material.input_freq = frequency
             abcd_matrix = self._material.ABCD
             end_vector = np.array([self._V_end, self._I_end]).T
-            start_vector = abcd_matrix.dot(end_vector)
+            start_vector = abcd_matrix @ end_vector
             transmission_coefficients[i] = self.get_transmission_coefficient(start_vector)
             reflection_coefficients[i] = self.get_reflection_coefficient(start_vector)
             i = i + 1

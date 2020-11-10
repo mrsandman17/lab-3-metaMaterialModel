@@ -21,7 +21,7 @@ class Circuit(Component):
         abcd = np.array([[1, 0], [0, 1]])
         for component in reversed(self._components):
             temp = component.ABCD
-            abcd = abcd.dot(temp)
+            abcd = abcd @ temp
         return abcd
 
     @Component.input_freq.setter
