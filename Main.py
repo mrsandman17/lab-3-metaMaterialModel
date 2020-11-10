@@ -1,18 +1,20 @@
 from ABCDSimulator import ABCDSimulator
 
 # Params for the MetaMaterial circuit
+CELLS_NUM = 2
+CELL_LEN = 1 * 10 ** -2
 R = 0
-L0 = 7 * 10 ** -11
+L0 = 0.01332 * 10**-4
 G = 0
-C0 = 1.8 * 10 ** -12
-L = 15 * 10 ** -9
-C = 1 * 10 ** -12
-CELL_LEN = 3 * 10 ** -2
-CELLS_NUM = 1
+C0 = 3.96*10**-11 / CELLS_NUM
+L = 2.35*10**-9
+C = 43*10**-12
+
+
 
 # freq range to scan
-START_FREQ = 1 * 10 ** 9
-END_FREQ = 20 * 10 ** 9
+START_FREQ = 1
+END_FREQ = 7*10**9
 
 # voltage and current at the end
 V_end = 1

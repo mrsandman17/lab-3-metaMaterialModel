@@ -4,7 +4,7 @@ from Components.Component import Component
 import numpy as np
 import matplotlib.pyplot as plt
 
-POINTS_NUM = 1000
+POINTS_NUM = 10000
 
 class ABCDSimulator:
 
@@ -34,10 +34,11 @@ class ABCDSimulator:
             transmission_coefficients[i] = self.get_transmission_coefficient(start_vector)
             reflection_coefficients[i] = self.get_reflection_coefficient(start_vector)
             i = i + 1
-        plt.plot(frequency_range, transmission_coefficients)
-        plt.ylabel('S11')
-        plt.xlabel('Frequency')
-        # plt.plot(frequency_range, reflection_coefficients)
+        fig, axs = plt.subplots(2)
+        axs[0].plot(frequency_range, transmission_coefficients)
+        axs[0].set_title('T')
+        axs[1].set_title('R')
+        axs[1].plot(frequency_range, reflection_coefficients)
         plt.show()
 
 
@@ -45,11 +46,12 @@ class ABCDSimulator:
         V_start = start_vector[0]
         I_start = start_vector[1]
         end_impedance = self._V_end / self._I_end
-        return np.absolute((V_start + end_impedance * I_start) / 2)
+        # return np.absolute((V_start + end_impedance * I_start) / 2)
+        return 1 - self.get_reflection_coefficient(start_vector)
 
 
     def get_reflection_coefficient(self, start_vector):
         V_start = start_vector[0]
         I_start = start_vector[1]
         end_impedance = self._V_end / self._I_end
-        return np.abs(((V_start + end_impedance * I_start) / (V_start - end_impedance * I_start)))
+        return np.absolute(((V_start + end_impedance * I_start) / (V_start - end_impedance * I_start)))
