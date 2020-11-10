@@ -4,6 +4,8 @@ from Components.Component import Component
 import numpy as np
 import matplotlib.pyplot as plt
 
+POINTS_NUM = 1000
+
 class ABCDSimulator:
 
     def __init__(self, R, L0, G, C0, L, C, cell_len, cells_num, start_frequency, end_frequency, V_end, I_end):
@@ -19,10 +21,10 @@ class ABCDSimulator:
         get its ABCD matrix, extract s11, s12 and plot
         :return:
         """
-
-        frequency_range = np.arange(self._start_frequency, self._end_frequency)
-        transmission_coefficients = np.empty((self._end_frequency - self._start_frequency))
-        reflection_coefficients = np.empty((self._end_frequency - self._start_frequency))
+        freq_distance = (self._end_frequency - self._start_frequency) / POINTS_NUM
+        frequency_range = np.arange(self._start_frequency, self._end_frequency, freq_distance)
+        transmission_coefficients = np.empty(POINTS_NUM)
+        reflection_coefficients = np.empty(POINTS_NUM)
         i = 0
         for frequency in frequency_range:
             self._material.input_freq = frequency
@@ -35,7 +37,7 @@ class ABCDSimulator:
         plt.plot(frequency_range, transmission_coefficients)
         plt.ylabel('S11')
         plt.xlabel('Frequency')
-        plt.plot(frequency_range, reflection_coefficients)
+        # plt.plot(frequency_range, reflection_coefficients)
         plt.show()
 
 
@@ -43,10 +45,11 @@ class ABCDSimulator:
         V_start = start_vector[0]
         I_start = start_vector[1]
         end_impedance = self._V_end / self._I_end
-        return (V_start + end_impedance * I_start)
+        return np.absolute((V_start + end_impedance * I_start) / 2)
+
 
     def get_reflection_coefficient(self, start_vector):
         V_start = start_vector[0]
         I_start = start_vector[1]
         end_impedance = self._V_end / self._I_end
-        return ((V_start + end_impedance * I_start) / (V_start - end_impedance * I_start))
+        return np.abs(((V_start + end_impedance * I_start) / (V_start - end_impedance * I_start)))
