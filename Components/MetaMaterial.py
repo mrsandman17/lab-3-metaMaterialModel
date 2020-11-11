@@ -1,6 +1,7 @@
 from Components.Circuit import Circuit
 from Components.Component import Component
 from Components.Cell import Cell
+from Components.LC import LC
 
 class MetaMaterial(Circuit):
     """
