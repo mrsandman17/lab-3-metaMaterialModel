@@ -1,6 +1,6 @@
 from ABCDSimulator import ABCDSimulator
 # Params for the MetaMaterial circuit
-CELLS_NUM = 10
+CELLS_NUM = 6
 CELL_LEN = 1 * 10 ** -2
 R = 0
 L0 = 0.01332 * 10**-7
