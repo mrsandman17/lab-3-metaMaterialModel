@@ -11,5 +11,5 @@ class LC(Circuit):
 
     def __init__(self, R, L0, G, C0, L, C, length, connection_type):
         super().__init__(connection_type)
-        self.add_component(Inductor(L, Component.SERIES))
-        self.add_component(Capacitor(C, Component.SERIES))
+        self.add_component(TransmissionLine(R, L0, G, C0, (length / 2), Component.SERIES))
+        self.add_component(TransmissionLine(R+10, L0, G+0.5, C0, (length / 2), Component.SERIES))

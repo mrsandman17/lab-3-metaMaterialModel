@@ -4,11 +4,11 @@ from ABCDSimulator import ABCDSimulator
 CELLS_NUM = 10
 CELL_LEN = 1 * 10 ** -2
 R = 0
-L0 = 0.01332 * 10**-5
+L0 = 0.01332 * 10**-7
 G = 0
-C0 = 3.96*10**-11 / CELLS_NUM
-L = 200*10**-9
-C = 100*10**-12
+C0 = 3.96*10**-10
+L = 15*10**-9
+C = 1*10**-12
 
 
 

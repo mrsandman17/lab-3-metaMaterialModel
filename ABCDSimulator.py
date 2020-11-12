@@ -47,8 +47,8 @@ class ABCDSimulator:
         I_start = start_vector[1]
         end_impedance = self._V_end / self._I_end
         start_impedence = V_start / I_start
-        return np.absolute((2 * start_impedence) / (start_impedence + end_impedance))
-        # return np.absolute((V_start + end_impedance * I_start) / 2)
+        # return np.absolute((2 * start_impedence) / (start_impedence + end_impedance))
+        return np.absolute((V_start + end_impedance * I_start) / 2)
         # return 1 - self.get_reflection_coefficient(start_vector)
 
 
@@ -57,5 +57,5 @@ class ABCDSimulator:
         I_start = start_vector[1]
         end_impedance = self._V_end / self._I_end
         start_impedence = V_start / I_start
-        return np.absolute((start_impedence - end_impedance) / (start_impedence + end_impedance))
-        # return np.absolute(((V_start + end_impedance * I_start) / (V_start - end_impedance * I_start)))
+        # return np.absolute((start_impedence - end_impedance) / (start_impedence + end_impedance))
+        return np.absolute(((V_start + end_impedance * I_start) / (V_start - end_impedance * I_start)))
