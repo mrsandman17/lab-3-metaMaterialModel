@@ -1,5 +1,4 @@
 from ABCDSimulator import ABCDSimulator
-
 # Params for the MetaMaterial circuit
 CELLS_NUM = 10
 CELL_LEN = 1 * 10 ** -2
@@ -23,6 +22,7 @@ I_end = 1 / 50
 def main():
     abcd_simulator = ABCDSimulator(R, L0, G, C0, L, C, CELL_LEN, CELLS_NUM, START_FREQ, END_FREQ, V_end, I_end)
     abcd_simulator.run()
+
 
 if __name__ == '__main__':
     main()
