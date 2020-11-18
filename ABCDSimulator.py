@@ -1,6 +1,6 @@
 from Components.MetaMaterial import MetaMaterial
 from Components.Component import Component
-
+from Components.CapacitorFilter import CapacitorFilter
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -12,6 +12,7 @@ class ABCDSimulator:
 
     def __init__(self, R, L0, G, C0, L, C, cell_len, cells_num, start_frequency, end_frequency, V_end, I_end):
         self._material = MetaMaterial(R, L0, G, C0, L, C, cell_len, cells_num, Component.SERIES)
+        # self._material = CapacitorFilter(C,R,Component.SERIES)
         self._start_frequency = start_frequency
         self._end_frequency = end_frequency
         self._V_end = V_end
@@ -40,11 +41,11 @@ class ABCDSimulator:
         title = f'{self._cells_num} Cells'
         fig.suptitle(title, x = 0.12, fontSize = FONT_SIZE)
 
-        axs[0].plot(frequency_range, s11_arr)
-        axs[0].set_title('S11')
+        axs[0].plot(frequency_range, np.log(1 + s11_arr))
+        axs[0].set_title('S11 - Reflection')
 
-        axs[1].set_title('S21')
-        axs[1].plot(frequency_range, s21_arr)
+        axs[1].set_title('S21 - Transmission')
+        axs[1].plot(frequency_range, np.log(1 + s21_arr))
         axs[1].set_xlabel('Frequency (Hz)')
         plt.show()
 

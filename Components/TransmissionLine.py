@@ -21,7 +21,7 @@ class TransmissionLine(Circuit):
     @property
     def gamma(self):
         return np.sqrt((self._components[0].impedance + self._components[1].impedance) *
-                       (self._components[2].impedance + self._components[3].impedance))
+                       (self._components[2].impedance + (1 / self._components[3].impedance)))
     @property
     def ABCD(self):
         param = self.gamma * self._length
@@ -31,4 +31,4 @@ class TransmissionLine(Circuit):
     @property
     def impedance(self):
         return np.sqrt(np.divide((self._components[0].impedance + self._components[1].impedance),
-                                 (self._components[2].impedance + self._components[3].impedance)))
+                                 (self._components[2].impedance + (1 / self._components[3].impedance))))
