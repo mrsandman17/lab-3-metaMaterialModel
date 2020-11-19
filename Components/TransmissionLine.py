@@ -13,10 +13,10 @@ class TransmissionLine(Circuit):
     def __init__(self, R, L0, G, C0, length, connection_type):
         super().__init__(connection_type)
         self._length = length
-        self.add_component(Resistor(R, Component.SERIES))
-        self.add_component(Inductor(L0, Component.SERIES))
-        self.add_component(Resistor(G, Component.SHUNT))
-        self.add_component(Capacitor(C0, Component.SHUNT))
+        self.add_component(Resistor(length * R, Component.SERIES))
+        self.add_component(Inductor(length * L0, Component.SERIES))
+        self.add_component(Resistor(length * G, Component.SHUNT))
+        self.add_component(Capacitor(length * C0, Component.SHUNT))
 
     @property
     def gamma(self):

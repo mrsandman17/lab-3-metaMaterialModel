@@ -11,5 +11,5 @@ class SingleTransition(Circuit):
 
     def __init__(self, R, L0, G, C0, L, C, length, connection_type):
         super().__init__(connection_type)
-        self.add_component(TransmissionLine(0, 291 * 10**-9, 0, 116* 10^-12, (0.00381), Component.SERIES))
+        self.add_component(TransmissionLine(R, L0, G, C0, (length / 2), Component.SERIES))
 
