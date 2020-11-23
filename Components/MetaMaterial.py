@@ -11,3 +11,7 @@ class MetaMaterial(Circuit):
         super().__init__(connection_type)
         for i in range(cells_num):
             self.add_component(Cell(R, L0, G, C0, L, C, cell_len, Component.SERIES))
+
+    @property
+    def gamma(self):
+        return self._components[0].gamma

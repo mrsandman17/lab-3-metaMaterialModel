@@ -15,3 +15,7 @@ class Cell(Circuit):
         self.add_component(Inductor(L, Component.SHUNT))
         self.add_component(TransmissionLine(R, L0, G, C0, (length / 2), Component.SERIES))
         self.add_component(Capacitor(C, Component.SERIES))
+
+    @property
+    def gamma(self):
+        return self._components[0].gamma
