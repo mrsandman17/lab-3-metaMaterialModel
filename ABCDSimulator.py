@@ -27,6 +27,7 @@ class ABCDSimulator:
         self._frequency_range = np.arange(self._start_frequency, self._end_frequency, freq_distance)
         self._s11_arr = np.zeros(POINTS_NUM, dtype=np.complex)
         self._s21_arr = np.zeros(POINTS_NUM, dtype=np.complex)
+        self._s12_arr = np.zeros(POINTS_NUM, dtype=np.complex)
         self._gamma_arr = np.zeros(POINTS_NUM, dtype=np.complex)
 
     def run(self):
@@ -41,8 +42,10 @@ class ABCDSimulator:
             abcd_matrix = self._material.ABCD
             self._s11_arr[i] = (self.get_s11(abcd_matrix))
             self._s21_arr[i] = (self.get_s21(abcd_matrix))
+            self._s12_arr[i] = (self.get_s12(abcd_matrix))
             self._gamma_arr[i] = self._material.gamma
             i = i + 1
+
 
     def plot_s_params(self):
         fig, axs = plt.subplots(2)
@@ -50,8 +53,8 @@ class ABCDSimulator:
         fig.suptitle(title, x=0.12, fontSize=FONT_SIZE)
         axs[0].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s11_arr)))
         axs[0].set_title('S11 - Reflection')
-        axs[1].set_title('S21 - Transmission')
-        axs[1].plot(self._frequency_range, 20 * np.log10(self._s21_arr))
+        axs[1].set_title('S12 - Transmission')
+        axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s12_arr)))
         axs[1].set_xlabel('Frequency (Hz)')
         plt.show()
 
@@ -78,3 +81,12 @@ class ABCDSimulator:
         D = abcd_matrix[1, 1]
         Z_end = self._V_end / self._I_end
         return 2 / (A + (B / Z_end) + (C * Z_end) + D)
+
+    def get_s12(self, abcd_matrix):
+        A = abcd_matrix[0, 0]
+        B = abcd_matrix[0, 1]
+        C = abcd_matrix[1, 0]
+        D = abcd_matrix[1, 1]
+        Z_end = self._V_end / self._I_end
+
+        return (2 * A*D -2*B*C) / (A + (B / Z_end) + (C * Z_end) + D)

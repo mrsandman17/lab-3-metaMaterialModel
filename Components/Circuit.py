@@ -19,7 +19,7 @@ class Circuit(Component):
         it is the product of all the ABCD matrices of the components
         """
         abcd = np.array([[1, 0], [0, 1]])
-        for component in reversed(self._components):
+        for component in (self._components):
             temp = component.ABCD
             abcd = np.matmul(abcd, temp)
         return abcd
