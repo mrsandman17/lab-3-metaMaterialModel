@@ -8,4 +8,4 @@ class Inductor(Component):
 
     @property
     def impedance(self):
-        return np.complex(1j * 2 * np.pi * self.input_freq * self._inductance)
+        return (1j * 2 * np.pi * self.input_freq * self._inductance)

@@ -13,10 +13,10 @@ class TransmissionLine(Circuit):
     def __init__(self, R, L0, G, C0, length, connection_type):
         super().__init__(connection_type)
         self._length = length
-        self.add_component(Resistor(length * R, Component.SERIES))
-        self.add_component(Inductor(length * L0, Component.SERIES))
-        self.add_component(Resistor(length * G, Component.SHUNT))
-        self.add_component(Capacitor(length * C0, Component.SHUNT))
+        self.add_component(Resistor(R, Component.SERIES))
+        self.add_component(Inductor(L0, Component.SERIES))
+        self.add_component(Resistor(G, Component.SHUNT))
+        self.add_component(Capacitor(C0, Component.SHUNT))
 
     @property
     def gamma(self):
@@ -26,12 +26,13 @@ class TransmissionLine(Circuit):
     @property
     def ABCD(self):
         param = self.gamma * self._length
-        print(self.impedance)
-        return np.array([[np.cos(param), 1j * self.impedance * np.sin(param)],
-                        [(1j / self.impedance) * np.sin(param), np.cos(param)]])
+        abcd = np.array([[np.cosh(param), self.impedance * np.sinh(param)],
+                        [(1 / self.impedance) * np.sinh(param), np.cosh(param)]], dtype=np.complex)
+        print(abcd,'\n')
+        return abcd
 
 
     @property
     def impedance(self):
-        return np.sqrt(np.divide((self._components[0].impedance + self._components[1].impedance),
+        return np.sqrt(((self._components[0].impedance + self._components[1].impedance)/
                                  (self._components[2].impedance + (1 / self._components[3].impedance))))

@@ -12,16 +12,34 @@ class Circuit(Component):
     def add_component(self, component):
         self._components.append(component)
 
+    # @property
+    # def ABCD(self):
+    #     """
+    #     :return: The ABCD matrix of the circuit,
+    #     it is the product of all the ABCD matrices of the components
+    #     """
+    #     abcd = np.array([[1, 0], [0, 1]])
+    #     for component in (self._components):
+    #         temp = component.ABCD
+    #         abcd = np.matmul(abcd, temp)
+    #     return abcd
     @property
     def ABCD(self):
         """
         :return: The ABCD matrix of the circuit,
         it is the product of all the ABCD matrices of the components
         """
-        abcd = np.array([[1, 0], [0, 1]])
-        for component in (self._components):
-            temp = component.ABCD
-            abcd = np.matmul(abcd, temp)
+
+        abcd = self._components[0].ABCD
+        abcd_f = np.empty(abcd.shape, dtype=np.complex)
+        for i in range(1, len(self._components)):
+            next = self._components[i].ABCD
+            abcd_f[0,0,:] = abcd[0,0,:] * next[0,0,:] + abcd[0,1,:] * next[1,0,:]
+            abcd_f[0,1,:] = abcd[0,0,:] * next[0,1,:] + abcd[0,1,:] * next[1,1,:]
+            abcd_f[1,0,:] = abcd[1,0,:] * next[0,0,:] + abcd[1,1,:] * next[1,0,:]
+            abcd_f[1,1,:] = abcd[1,0,:] * next[0,1,:] + abcd[1,1,:] * next[1,1,:]
+            abcd = abcd_f
+
         return abcd
 
     @Component.input_freq.setter

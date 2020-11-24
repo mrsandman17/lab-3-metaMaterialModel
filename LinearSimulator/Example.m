@@ -20,34 +20,42 @@ n=1;
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
   ABCD{n} = ser_c(f,1e-12);  n=n+1;               %4  Series capacitor
+  
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %1  Transmission Line, 50ohms not very lossy
   ABCD{n} = par_l(f,7.5e-9);  n=n+1;                %2  Parallel inductor
   ABCD{n} = tline(f,3.48e-7,1e-10,1.89e-10,0.5e-2) ;n=n+1;          %3  Transmission Line, 50ohms not very lossy
@@ -56,6 +64,7 @@ n=1;
 
 %Combine all ABCD matrices in a cascade
 ABCD_C=cascade_combine(ABCD);
+
 
 %Find the voltage transfer function, = H(s) = Vout/Vin.
 %  This is equal to 1/A in the ABCD matrix

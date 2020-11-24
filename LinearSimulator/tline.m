@@ -11,7 +11,7 @@ function ABCD=tline(f,L,R,C,length_cable)
 ww=f.*2.*pi;
         gamma=sqrt((R+j.*ww.*L).*(j.*ww.*C));  %Gamma assuming G=0
         Z0=sqrt((R+j.*ww.*L)./(j.*ww.*C));     %Complex Z0  
-        Z0
+        
         %Now fill in the matrix equations
         A=cosh(gamma.*length_cable);
         B=Z0.*sinh(gamma.*length_cable);
@@ -21,3 +21,4 @@ ABCD(:,1)=A;
 ABCD(:,2)=B;
 ABCD(:,3)=C;
 ABCD(:,4)=D;
+disp(ABCD)

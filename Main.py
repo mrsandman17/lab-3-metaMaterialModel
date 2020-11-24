@@ -3,7 +3,7 @@ from ABCDSimulator import ABCDSimulator
 import numpy as np
 import matplotlib.pyplot as plt
 
-CELLS_NUM = 9
+CELLS_NUM = 10
 CELL_LEN = 1 * 10 ** -2
 #R = 1 * 10 **  4
 #G = 1 * 10 **  4

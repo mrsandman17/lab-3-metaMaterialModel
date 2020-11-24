@@ -37,8 +37,8 @@ class Component:
 
     @staticmethod
     def _get_series_ABCD(impedance):
-        return np.array([[1, impedance], [0, 1]])
+        return np.array([[np.ones(impedance.size), impedance], [np.zeros(impedance.size), np.ones(impedance.size)]], dtype=np.complex)
 
     @staticmethod
     def _get_shunt_ABCD(impedance):
-        return np.array([[1, 0], [1 / impedance, 1]])
+        return np.array([[np.ones(impedance.size), np.zeros(impedance.size)], [1 / impedance, np.ones(impedance.size)]], dtype=np.complex)
