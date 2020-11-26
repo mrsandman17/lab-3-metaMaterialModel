@@ -27,8 +27,7 @@ class TransmissionLine(Circuit):
     def ABCD(self):
         param = self.gamma * self._length
         abcd = np.array([[np.cosh(param), self.impedance * np.sinh(param)],
-                        [(1 / self.impedance) * np.sinh(param), np.cosh(param)]], dtype=np.complex)
-        print(abcd,'\n')
+                        [1 * np.sinh(param)/ self.impedance, np.cosh(param)]], dtype=np.complex)
         return abcd
 
 

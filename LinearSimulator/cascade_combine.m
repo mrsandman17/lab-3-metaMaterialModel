@@ -46,5 +46,4 @@ for n=2:length(ABCD_Cell),
     ABCD_f(:,4)=ABCD(:,3).*next(:,2)+ABCD(:,4).*next(:,4);
     
     ABCD=ABCD_f;
-    
 end

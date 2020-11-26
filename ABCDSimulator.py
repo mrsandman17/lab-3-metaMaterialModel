@@ -23,7 +23,6 @@ class ABCDSimulator:
         self._V_end = V_end
         self._I_end = I_end
         self._cells_num = cells_num
-        freq_distance = (self._end_frequency - self._start_frequency) / POINTS_NUM
         self._frequency_range = np.linspace(self._start_frequency, self._end_frequency, POINTS_NUM)
         self._s11_arr = np.zeros((2,2,POINTS_NUM), dtype=np.complex)
         self._s21_arr = np.zeros((2,2,POINTS_NUM), dtype=np.complex)
@@ -47,15 +46,14 @@ class ABCDSimulator:
 
 
     def plot_s_params(self):
-        # fig, axs = plt.subplots(2)
-        # title = f' Cells={self._cells_num}'
-        # fig.suptitle(title, x=0.12, fontSize=FONT_SIZE)
-        # axs[0].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s11_arr)))
-        # axs[0].set_title('S11 - Reflection')
-        # axs[1].set_title('S12 - Transmission')
-        # axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s12_arr)))
-        # axs[1].set_xlabel('Frequency (Hz)')
-        plt.plot(self._frequency_range, 20 * np.log10(np.absolute(self._s11_arr)))
+        fig, axs = plt.subplots(2)
+        title = f' Cells={self._cells_num}'
+        fig.suptitle(title, x=0.12, fontSize=FONT_SIZE)
+        axs[0].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s11_arr)))
+        axs[0].set_title('S11 - Reflection')
+        axs[1].set_title('S21 - Transmission')
+        axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s21_arr)))
+        axs[1].set_xlabel('Frequency (Hz)')
         plt.show()
 
     @property

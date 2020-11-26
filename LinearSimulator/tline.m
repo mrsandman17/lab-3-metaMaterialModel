@@ -21,4 +21,3 @@ ABCD(:,1)=A;
 ABCD(:,2)=B;
 ABCD(:,3)=C;
 ABCD(:,4)=D;
-disp(ABCD)

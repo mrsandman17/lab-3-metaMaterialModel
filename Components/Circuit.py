@@ -38,7 +38,7 @@ class Circuit(Component):
             abcd_f[0,1,:] = abcd[0,0,:] * next[0,1,:] + abcd[0,1,:] * next[1,1,:]
             abcd_f[1,0,:] = abcd[1,0,:] * next[0,0,:] + abcd[1,1,:] * next[1,0,:]
             abcd_f[1,1,:] = abcd[1,0,:] * next[0,1,:] + abcd[1,1,:] * next[1,1,:]
-            abcd = abcd_f
+            abcd = np.copy(abcd_f)
 
         return abcd
 
