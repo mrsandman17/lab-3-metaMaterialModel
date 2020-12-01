@@ -11,14 +11,14 @@ R = 1 * 10 ** -10
 L0 = 3.48 * 10**-7
 G = 0
 C0 = 1.89*10**-10
-L = 7.5*10**-9
-C = 1*10**-12
+L = 1.6*10**-8
+C = 6*10**-12
 
 
 
 # freq range to scan
-START_FREQ = 1*10**9
-END_FREQ = 14*10**9
+START_FREQ = 2*10**9
+END_FREQ = 10*10**9
 
 # voltage and current at the end
 V_end = 1

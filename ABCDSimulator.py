@@ -28,6 +28,7 @@ class ABCDSimulator:
         self._s21_arr = np.zeros((2,2,POINTS_NUM), dtype=np.complex)
         self._s12_arr = np.zeros((2,2,POINTS_NUM), dtype=np.complex)
         self._gamma_arr = np.zeros(POINTS_NUM, dtype=np.complex)
+        self._w1, self._w2 = self._get_band_gap_frequencies(C0, L0, C, L, cell_len)
 
     def run(self):
         """
@@ -54,6 +55,10 @@ class ABCDSimulator:
         axs[1].set_title('S21 - Transmission')
         axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s21_arr)))
         axs[1].set_xlabel('Frequency (Hz)')
+        axs[0].axvline(x=self._w1, color='r')
+        axs[0].axvline(x=self._w2, color='r')
+        axs[1].axvline(x=self._w1, color='r')
+        axs[1].axvline(x=self._w2, color='r')
         plt.show()
 
     @property
@@ -88,3 +93,8 @@ class ABCDSimulator:
         Z_end = self._V_end / self._I_end
 
         return (2 *A*D - 2*B*C) / (A + (B / Z_end) + (C * Z_end) + D)
+
+    def _get_band_gap_frequencies(self, c0, l0, c, l, cell_len):
+        w1 = 1 / (np.sqrt(c0 * l * cell_len))
+        w2 = 1 / (np.sqrt(l0 * c * cell_len))
+        return w1, w2
