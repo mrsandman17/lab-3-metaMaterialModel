@@ -4,21 +4,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 CELLS_NUM = 10
-CELL_LEN = 1 * 10 ** -2
+CELL_LEN = 0.9 * 10 ** -2
 #R = 1 * 10 **  4
 #G = 1 * 10 **  4
-R = 1 * 10 ** -10
-L0 = 3.48 * 10**-7
+R = 0
+L0 = 2.507571e-05
 G = 0
-C0 = 1.89*10**-10
-L = 1.6*10**-8
-C = 6*10**-12
+C0 = 9.436989e-09
+L = 5.6*10**-9
+C = 1*10**-12
 
+W1 = 1.45 * 10 ** 9
+W2 = 2.105 * 10 ** 9
 
 
 # freq range to scan
-START_FREQ = 2*10**9
-END_FREQ = 10*10**9
+START_FREQ = 0.5*10**9
+END_FREQ = 14*10**9
 
 # voltage and current at the end
 V_end = 1
@@ -28,6 +30,7 @@ FONT_SIZE = 16
 
 def main():
 
+    print_C0_L0()
     # simulate_over_cells_num()
     # simulate_over_cell_len()
     # simulate_over_R_G()
@@ -142,6 +145,11 @@ def print_band_gap_frequencies(c0, l0, c, l, cell_len):
     print(f'w1: {w1:e}')
     print(f'w2: {w2:e}')
 
+def print_C0_L0():
+    c0 = 1 / ((W1 **2) * L * CELL_LEN)
+    l0 = 1 / ((W2 **2) * C * CELL_LEN)
+    print(f'C0: {c0:e}')
+    print(f'L0: {l0:e}')
 
 def board_spec_simulation():
     l0 = 3.574 * 10**-9
