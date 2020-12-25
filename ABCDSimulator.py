@@ -95,6 +95,6 @@ class ABCDSimulator:
         return (2 *A*D - 2*B*C) / (A + (B / Z_end) + (C * Z_end) + D)
 
     def _get_band_gap_frequencies(self, c0, l0, c, l, cell_len):
-        w1 = 1 / (np.sqrt(c0 * l * cell_len))
-        w2 = 1 / (np.sqrt(l0 * c * cell_len))
+        w1 = 1 / (np.sqrt(c0 * l * cell_len)) * (1 / (2 *np.pi))
+        w2 = 1 / (np.sqrt(l0 * c * cell_len)) * (1 / (2 *np.pi))
         return w1, w2

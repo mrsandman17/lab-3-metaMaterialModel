@@ -4,22 +4,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 CELLS_NUM = 10
-CELL_LEN = 0.9 * 10 ** -2
+CELL_LEN = 1 * 10 ** -2
 #R = 1 * 10 **  4
 #G = 1 * 10 **  4
-R = 0
-L0 = 2.507571e-05
+R = 10 ** -10
+L0 = 3.48e-7
 G = 0
-C0 = 9.436989e-09
+C0 = 1.89e-10
 L = 5.6*10**-9
 C = 1*10**-12
 
-W1 = 1.45 * 10 ** 9
-W2 = 2.105 * 10 ** 9
+W1 = 6 * 10 ** 9
+W2 = 8 * 10 ** 9
 
 
 # freq range to scan
-START_FREQ = 0.5*10**9
+START_FREQ = 1*10**9
 END_FREQ = 14*10**9
 
 # voltage and current at the end
@@ -140,8 +140,8 @@ def single_simulation():
     abcd_simulator.plot_s_params()
 
 def print_band_gap_frequencies(c0, l0, c, l, cell_len):
-    w1 = 1 / (np.sqrt(c0 * l * cell_len))
-    w2 = 1 / (np.sqrt(l0 * c * cell_len))
+    w1 = 1 / (np.sqrt(c0 * l * cell_len)) * (1 / (2 *np.pi))
+    w2 = 1 / (np.sqrt(l0 * c * cell_len)) * (1 / (2 *np.pi))
     print(f'w1: {w1:e}')
     print(f'w2: {w2:e}')
 
