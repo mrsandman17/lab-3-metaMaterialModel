@@ -6,6 +6,8 @@ from Components.SingleTransition import SingleTransition
 from Components.Attenuator import Attenuator
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+
 
 POINTS_NUM = 1000
 
@@ -29,6 +31,9 @@ class ABCDSimulator:
         self._s12_arr = np.zeros((2,2,POINTS_NUM), dtype=np.complex)
         self._gamma_arr = np.zeros(POINTS_NUM, dtype=np.complex)
         self._w1, self._w2 = self._get_band_gap_frequencies(C0, L0, C, L, cell_len)
+        self._measured_s11 = None
+        self._measured_s21 = None
+
 
     def run(self):
         """
@@ -46,7 +51,7 @@ class ABCDSimulator:
 
 
 
-    def plot_s_params(self):
+    def plot_s_params(self, plot_measured_data=False):
         fig, axs = plt.subplots(2)
         title = f' Cells={self._cells_num}'
         fig.suptitle(title, x=0.12, fontSize=FONT_SIZE)
@@ -55,10 +60,15 @@ class ABCDSimulator:
         axs[1].set_title('S21 - Transmission')
         axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s21_arr)))
         axs[1].set_xlabel('Frequency (Hz)')
+        if plot_measured_data:
+            axs[0].plot(self._frequency_range, self._measured_s11)
+            axs[1].plot(self._frequency_range, self._measured_s21)
+        # Plot band gap borders
         axs[0].axvline(x=self._w1, color='r')
         axs[0].axvline(x=self._w2, color='r')
         axs[1].axvline(x=self._w1, color='r')
         axs[1].axvline(x=self._w2, color='r')
+
         plt.show()
 
     @property
@@ -98,3 +108,11 @@ class ABCDSimulator:
         w1 = 1 / (np.sqrt(c0 * l * cell_len)) * (1 / (2 *np.pi))
         w2 = 1 / (np.sqrt(l0 * c * cell_len)) * (1 / (2 *np.pi))
         return w1, w2
+
+    def read_measured_data(self, s11_path, s21_path):
+
+        s11 = np.array(pd.read_csv(s11_path, sep=",", header=None))
+        s21 = np.array(pd.read_csv(s21_path, sep=",", header=None))
+        xp = np.linspace(self._start_frequency, self._end_frequency, s11.shape[0])
+        self._measured_s11 = np.interp(self.frequency_range, xp, s11[:,0])
+        self._measured_s21 = np.interp(self.frequency_range, xp, s21[:,0])
