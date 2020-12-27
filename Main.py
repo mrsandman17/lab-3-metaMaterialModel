@@ -7,8 +7,15 @@ ROI_BOARD_WIDE_S11 = r'MeasuredData\roi_board_wide_s11.csv'
 ROI_BOARD_WIDE_S21 = r'MeasuredData\roi_board_wide_s21.csv'
 ROI_BOARD_GAP_S11 = r'MeasuredData\roi_board_gap_s11.csv'
 ROI_BOARD_GAP_S21 = r'MeasuredData\roi_board_gap_s21.csv'
+AMIT_BOARD_WIDE_S11 = r'MeasuredData\amit_board_wide_s11.csv'
+AMIT_BOARD_WIDE_S21 = r'MeasuredData\amit_board_wide_s21.csv'
+AMIT_BOARD_GAP_S11 = r'MeasuredData\amit_board_gap_s11.csv'
+AMIT_BOARD_GAP_S21 = r'MeasuredData\amit_board_gap_s21.csv'
 MEASURED_S11_PATH = ROI_BOARD_WIDE_S11
 MEASURED_S21_PATH = ROI_BOARD_WIDE_S21
+
+SAVE_FIG = True
+PLOT_MEASURED_DATA = True
 CELLS_NUM = 10
 CELL_LEN = 1 * 10 ** -2
 #R = 1 * 10 **  4
@@ -20,12 +27,14 @@ C0 = 1.89e-10
 L = 5.6*10**-9
 C = 1*10**-12
 
+#USED for c0, l0 calculation
 W1 = 6 * 10 ** 9
 W2 = 8 * 10 ** 9
 
 
 # freq range to scan
-START_FREQ = 0.5*10**9
+# START_FREQ = 1.04*10**9
+START_FREQ = 1.04*10**9
 END_FREQ = 14*10**9
 
 # voltage and current at the end
@@ -144,7 +153,7 @@ def single_simulation():
     abcd_simulator = ABCDSimulator(R, L0, G, C0, L, C, CELL_LEN, CELLS_NUM, START_FREQ, END_FREQ, V_end, I_end)
     abcd_simulator.read_measured_data(MEASURED_S11_PATH, MEASURED_S21_PATH)
     abcd_simulator.run()
-    abcd_simulator.plot_s_params(plot_measured_data=True)
+    abcd_simulator.plot_s_params(SAVE_FIG, PLOT_MEASURED_DATA)
 
 def print_band_gap_frequencies(c0, l0, c, l, cell_len):
     w1 = 1 / (np.sqrt(c0 * l * cell_len)) * (1 / (2 *np.pi))

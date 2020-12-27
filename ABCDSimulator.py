@@ -51,25 +51,30 @@ class ABCDSimulator:
 
 
 
-    def plot_s_params(self, plot_measured_data=False):
-        fig, axs = plt.subplots(2)
-        title = f' Cells={self._cells_num}'
-        fig.suptitle(title, x=0.12, fontSize=FONT_SIZE)
-        axs[0].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s11_arr)))
+    def plot_s_params(self, save_fig=False, plot_measured_data=False):
+        fig, axs = plt.subplots(2, sharex='col')
+        title = f' {self._cells_num} Cells'
+        fig.suptitle(title, x=0.14, fontSize=FONT_SIZE)
+        axs[0].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s11_arr)), label = 'Model')
         axs[0].set_title('S11 - Reflection')
         axs[1].set_title('S21 - Transmission')
-        axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s21_arr)))
+        axs[1].plot(self._frequency_range, 20 * np.log10(np.absolute(self._s21_arr)), label = 'Model')
         axs[1].set_xlabel('Frequency (Hz)')
+        axs[0].set_ylabel('Db')
+        axs[1].set_ylabel('Db')
         if plot_measured_data:
-            axs[0].plot(self._frequency_range, self._measured_s11)
-            axs[1].plot(self._frequency_range, self._measured_s21)
+            axs[0].plot(self._frequency_range, self._measured_s11, label = 'Measurement')
+            axs[1].plot(self._frequency_range, self._measured_s21, label = 'Measurement')
         # Plot band gap borders
         axs[0].axvline(x=self._w1, color='r')
         axs[0].axvline(x=self._w2, color='r')
         axs[1].axvline(x=self._w1, color='r')
         axs[1].axvline(x=self._w2, color='r')
-
+        plt.legend()
+        if save_fig:
+            plt.savefig(f'sParams.png', dpi = 250)
         plt.show()
+
 
     @property
     def frequency_range(self):
