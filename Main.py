@@ -3,14 +3,6 @@ from ABCDSimulator import ABCDSimulator
 import numpy as np
 import matplotlib.pyplot as plt
 
-ROI_BOARD_WIDE_S11 = r'MeasuredData\roi_board_wide_s11.csv'
-ROI_BOARD_WIDE_S21 = r'MeasuredData\roi_board_wide_s21.csv'
-ROI_BOARD_GAP_S11 = r'MeasuredData\roi_board_gap_s11.csv'
-ROI_BOARD_GAP_S21 = r'MeasuredData\roi_board_gap_s21.csv'
-AMIT_BOARD_WIDE_S11 = r'MeasuredData\amit_board_wide_s11.csv'
-AMIT_BOARD_WIDE_S21 = r'MeasuredData\amit_board_wide_s21.csv'
-AMIT_BOARD_GAP_S11 = r'MeasuredData\amit_board_gap_s11.csv'
-AMIT_BOARD_GAP_S21 = r'MeasuredData\amit_board_gap_s21.csv'
 OLD_BOARD_GAP_S11 = r'MeasuredData\old_board_gap_s11.csv'
 OLD_BOARD_GAP_S21 = r'MeasuredData\old_board_gap_s21.csv'
 MEASURED_S11_PATH = OLD_BOARD_GAP_S11
@@ -21,8 +13,6 @@ PLOT_MEASURED_DATA = True
 
 CELLS_NUM = 10
 CELL_LEN = 1 * 10 ** -2
-#R = 1 * 10 **  4
-#G = 1 * 10 **  4
 R = 10 ** -10
 L0 = 3.48e-7
 G = 0
@@ -36,7 +26,6 @@ W2 = 8 * 10 ** 9
 
 
 # freq range to scan
-# START_FREQ = 1.04*10**9
 START_FREQ = 1*10**9
 END_FREQ = 4*10**9
 

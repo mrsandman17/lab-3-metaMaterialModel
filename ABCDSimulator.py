@@ -17,9 +17,6 @@ class ABCDSimulator:
 
     def __init__(self, R, L0, G, C0, L, C, cell_len, cells_num, start_frequency, end_frequency, V_end, I_end):
         self._material = MetaMaterial(R, L0, G, C0, L, C, cell_len, cells_num, Component.SERIES)
-        # self._material = Resonator(R, L0, G, C0, L, C, cell_len, Component.SERIES)
-        # self._material = SingleTransition(R, L0, G, C0, L, C, cell_len, Component.SERIES)
-        # self._material = Attenuator(R, L0, G, C0, L, C, cell_len, Component.SERIES)
         self._start_frequency = start_frequency
         self._end_frequency = end_frequency
         self._V_end = V_end

@@ -3,6 +3,7 @@ import numpy as np
 class Component:
     """
     A basic electric component, all components have a connection_type
+    **abstract class**
     """
 
     # Connection types

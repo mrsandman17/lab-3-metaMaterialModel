@@ -60,7 +60,7 @@ def main():
     frequency_range = np.linspace(START_F, END_F, POINTS_NUM)
     s11_arr = (get_s11(abcd_matrix))
     s21_arr = (get_s21(abcd_matrix))
-    s12_arr = (get_s12(abcd_matrix))
+    # s12_arr = (get_s12(abcd_matrix))
     plot_s_params(frequency_range, s11_arr, s21_arr)
 
 if __name__ == '__main__':
