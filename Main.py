@@ -1,7 +1,9 @@
 from ABCDSimulator import ABCDSimulator
-# Params for the MetaMaterial circuit
+
 import numpy as np
 import matplotlib.pyplot as plt
+
+
 
 OLD_BOARD_GAP_S11 = r'MeasuredData\old_board_gap_s11.csv'
 OLD_BOARD_GAP_S21 = r'MeasuredData\old_board_gap_s21.csv'
@@ -10,6 +12,8 @@ MEASURED_S21_PATH = OLD_BOARD_GAP_S21
 
 SAVE_FIG = True
 PLOT_MEASURED_DATA = True
+
+# Params for the MetaMaterial circuit
 
 CELLS_NUM = 10
 CELL_LEN = 1 * 10 ** -2
@@ -23,7 +27,6 @@ C = 1*10**-12
 #USED for c0, l0 calculation
 W1 = 6 * 10 ** 9
 W2 = 8 * 10 ** 9
-
 
 # freq range to scan
 START_FREQ = 1*10**9
@@ -46,6 +49,32 @@ def main():
     single_simulation()
     # board_spec_simulation()
 
+
+def single_simulation():
+    """
+    Performs a single simulation with the specified constants
+    :return:
+    """
+    print_band_gap_frequencies(C0,L0, C, L, CELL_LEN)
+    abcd_simulator = ABCDSimulator(R, L0, G, C0, L, C, CELL_LEN, CELLS_NUM, START_FREQ, END_FREQ, V_end, I_end)
+    abcd_simulator.read_measured_data(MEASURED_S11_PATH, MEASURED_S21_PATH)
+    abcd_simulator.run()
+    abcd_simulator.plot_s_params(SAVE_FIG, PLOT_MEASURED_DATA)
+
+def print_band_gap_frequencies(c0, l0, c, l, cell_len):
+    w1 = 1 / (np.sqrt(c0 * l * cell_len)) * (1 / (2 *np.pi))
+    w2 = 1 / (np.sqrt(l0 * c * cell_len)) * (1 / (2 *np.pi))
+    print(f'w1: {w1:e}')
+    print(f'w2: {w2:e}')
+
+def print_C0_L0():
+    c0 = 1 / ((W1 **2) * L * CELL_LEN)
+    l0 = 1 / ((W2 **2) * C * CELL_LEN)
+    print(f'C0: {c0:e}')
+    print(f'L0: {l0:e}')
+
+### Different variation functions, each func variates some parameter of the simulation
+
 def simulate_over_cells_num():
     print_band_gap_frequencies(C0,L0, C, L, CELL_LEN)
     min_cell_num = 1
@@ -59,14 +88,12 @@ def simulate_over_R_G():
     # SET R TO AT LEAST 10 ** 4 FOR AN EFFECT ON THE SIMULATION!
     print_band_gap_frequencies(C0,L0, C, L, CELL_LEN)
     gammas = []
-    freq_arr = None
     for i in range(-10, 3):
         r = R * (10 ** i)
         g = r
         abcd_simulator = ABCDSimulator(r, L0, g, C0, L, C, CELL_LEN, CELLS_NUM, START_FREQ, END_FREQ, V_end, I_end)
         abcd_simulator.run()
         abcd_simulator.plot_s_params()
-        freq_arr = abcd_simulator.frequency_range
         gammas.append(abcd_simulator.gamma_arr)
 
 
@@ -139,25 +166,6 @@ def simulate_over_cell_len():
     plt.ylabel('Gamma (Db)')
     plt.legend(loc='best')
     plt.show()
-
-def single_simulation():
-    print_band_gap_frequencies(C0,L0, C, L, CELL_LEN)
-    abcd_simulator = ABCDSimulator(R, L0, G, C0, L, C, CELL_LEN, CELLS_NUM, START_FREQ, END_FREQ, V_end, I_end)
-    abcd_simulator.read_measured_data(MEASURED_S11_PATH, MEASURED_S21_PATH)
-    abcd_simulator.run()
-    abcd_simulator.plot_s_params(SAVE_FIG, PLOT_MEASURED_DATA)
-
-def print_band_gap_frequencies(c0, l0, c, l, cell_len):
-    w1 = 1 / (np.sqrt(c0 * l * cell_len)) * (1 / (2 *np.pi))
-    w2 = 1 / (np.sqrt(l0 * c * cell_len)) * (1 / (2 *np.pi))
-    print(f'w1: {w1:e}')
-    print(f'w2: {w2:e}')
-
-def print_C0_L0():
-    c0 = 1 / ((W1 **2) * L * CELL_LEN)
-    l0 = 1 / ((W2 **2) * C * CELL_LEN)
-    print(f'C0: {c0:e}')
-    print(f'L0: {l0:e}')
 
 def board_spec_simulation():
     l0 = 3.574 * 10**-9

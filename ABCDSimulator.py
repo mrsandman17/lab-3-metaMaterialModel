@@ -1,9 +1,5 @@
 from Components.MetaMaterial import MetaMaterial
 from Components.Component import Component
-from Components.CapacitorFilter import CapacitorFilter
-from Components.Resonator import Resonator
-from Components.SingleTransition import SingleTransition
-from Components.Attenuator import Attenuator
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -38,7 +34,6 @@ class ABCDSimulator:
         get its ABCD matrix, extract s11, s12 and plot
         :return:
         """
-
         self._material.input_freq = self._frequency_range
         abcd_matrix = self._material.ABCD
         self._s11_arr = (self.get_s11(abcd_matrix))
@@ -49,6 +44,12 @@ class ABCDSimulator:
 
 
     def plot_s_params(self, save_fig=False, plot_measured_data=False):
+        """
+        Plot s params of the simulation
+        :param save_fig: whether to save the fig, will be saved to workdir
+        :param plot_measured_data: whether to plot measured data on the same graph(should be read before)
+        :return:
+        """
         fig, axs = plt.subplots(2, sharex='col')
         title = f' {self._cells_num} Cells'
         fig.suptitle(title, x=0.14, fontSize=FONT_SIZE)
@@ -103,7 +104,6 @@ class ABCDSimulator:
         C = abcd_matrix[1, 0,:]
         D = abcd_matrix[1, 1,:]
         Z_end = self._V_end / self._I_end
-
         return (2 *A*D - 2*B*C) / (A + (B / Z_end) + (C * Z_end) + D)
 
     def _get_band_gap_frequencies(self, c0, l0, c, l, cell_len):
@@ -112,7 +112,10 @@ class ABCDSimulator:
         return w1, w2
 
     def read_measured_data(self, s11_path, s21_path):
-
+        """
+        Reads s11 and s21 data from csv file (as a single column),
+        interpolates it linearly according to the simulation dimensions.
+        """
         s11 = np.array(pd.read_csv(s11_path, sep=",", header=None))
         s21 = np.array(pd.read_csv(s21_path, sep=",", header=None))
         xp = np.linspace(self._start_frequency, self._end_frequency, s11.shape[0])

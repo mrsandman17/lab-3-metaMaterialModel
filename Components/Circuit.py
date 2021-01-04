@@ -4,6 +4,7 @@ from Components.Component import Component
 class Circuit(Component):
     """
     An electric circuit, can hold multiple components
+    The components, and the order of which they are added, is what defines the circuit.
     """
     def __init__(self, connection_type):
         super().__init__(connection_type)
